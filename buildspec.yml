@@ -12,12 +12,16 @@ phases:
       - echo "Build started on `date`"
   build:
     commands:
-      - echo Running build process...
-      - npm run build
+      - echo Building frontend...
+      - npm run build:frontend
+      - echo Building server...
+      - npm run build:server
   post_build:
     commands:
       - echo "Build Completed on `date`"
 
 artifacts:
   files:
-    - '**/*'
+    - 'build/**/*'
+    - 'frontend/dist/**/*'
+  base-directory: .
