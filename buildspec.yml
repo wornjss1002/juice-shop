@@ -6,6 +6,7 @@ phases:
       nodejs: 20
     commands:
       - echo Installing dependencies...
+      - npm install -g typescript
       - npm install
   pre_build:
     commands:
