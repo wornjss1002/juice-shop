@@ -9,6 +9,8 @@ phases:
       - npm install
   pre_build:
     commands:
+      - echo Installing latest TypeScript...
+      - npm install typescript@latest --save-dev
       - echo "Build started on `date`"
   build:
     commands:
