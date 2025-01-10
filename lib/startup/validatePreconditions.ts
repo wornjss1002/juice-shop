@@ -35,7 +35,7 @@ const validatePreconditions = async ({ exitOnFailure = true } = {}) => {
     checkIfRequiredFileExists('frontend/dist/frontend/vendor.js'),
     checkIfPortIsAvailable(process.env.PORT ?? config.get<number>('server.port')),
     checkIfDomainReachable('https://www.alchemy.com/')
-  ])).every(condition => condition)
+  ])).every((condition: boolean) => condition);
 
   if ((!success || !asyncConditions) && exitOnFailure) {
     logger.error(colors.red('Exiting due to unsatisfied precondition!'))
