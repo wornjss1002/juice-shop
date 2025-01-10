@@ -6,16 +6,17 @@ phases:
       nodejs: 20
     commands:
       - echo Installing dependencies...
-      - npm install -g typescript
-      - npm install
+      - npm install --legacy-peer-deps
   pre_build:
     commands:
       - echo "Build started on `date`"
   build:
     commands:
-      - echo Building frontend...
+      - echo "Updating TypeScript to a compatible version..."
+      - npm install typescript@latest --save-dev
+      - echo "Building frontend..."
       - npm run build:frontend
-      - echo Building server...
+      - echo "Building server..."
       - npm run build:server
   post_build:
     commands:
