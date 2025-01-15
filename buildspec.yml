@@ -3,27 +3,25 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 20
-    commands:
-      - echo Installing dependencies...
-      - npm install --legacy-peer-deps
+      docker: 20
   pre_build:
     commands:
-      - echo "Build started on `date`"
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 711387094022.dkr.ecr.ap-northeast-2.amazonaws.com
+      - echo Successfully logged in to Amazon ECR.
   build:
     commands:
-      - echo "Updating TypeScript to a compatible version..."
-      - npm install typescript@latest --save-dev
-      - echo "Building frontend..."
-      - npm run build:frontend
-      - echo "Building server..."
-      - npm run build:server
+      - echo Building the Docker image...
+      - docker build -t devops-juice-shop/docker-image .
+      - echo Docker image built successfully.
+      - echo Tagging the Docker image...
+      - docker tag devops-juice-shop/docker-image:latest 711387094022.dkr.ecr.ap-northeast-2.amazonaws.com/devops-juice-shop/docker-image:latest
+      - echo Docker image tagged successfully.
   post_build:
     commands:
-      - echo "Build Completed on `date`"
-
+      - echo Pushing the Docker image to Amazon ECR...
+      - docker push 711387094022.dkr.ecr.ap-northeast-2.amazonaws.com/devops-juice-shop/docker-image:latest
+      - echo Docker image pushed successfully.
 artifacts:
   files:
-    - 'build/**/*'
-    - 'frontend/dist/**/*'
-  base-directory: .
+    - imagedefinitions.json
