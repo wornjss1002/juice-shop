@@ -10,7 +10,7 @@ phases:
   build:
     commands:
       - echo Building the Docker image...
-      - docker build -t juice-shop-scp .
+      - docker build --no-cache -t juice-shop-scp .
       - echo Docker image built successfully.
       - echo Tagging the Docker image...
       - docker tag juice-shop-scp:latest 711387094022.dkr.ecr.ap-northeast-2.amazonaws.com/juice-shop-scp:latest
