@@ -6,6 +6,7 @@ phases:
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 711387094022.dkr.ecr.ap-northeast-2.amazonaws.com
       - echo Successfully logged in to Amazon ECR.
+
   build:
     commands:
       - echo Building the Docker image...
@@ -14,11 +15,16 @@ phases:
       - echo Tagging the Docker image...
       - docker tag juice-shop-scp:latest 711387094022.dkr.ecr.ap-northeast-2.amazonaws.com/juice-shop-scp:latest
       - echo Docker image tagged successfully.
+
   post_build:
     commands:
       - echo Pushing the Docker image to Amazon ECR...
       - docker push 711387094022.dkr.ecr.ap-northeast-2.amazonaws.com/juice-shop-scp:latest
       - echo Docker image pushed successfully.
+      - echo Creating imagedefinitions.json file for ECS deployment...
+      - echo '[{"name":"juice-shop-scp","imageUri":"711387094022.dkr.ecr.ap-northeast-2.amazonaws.com/juice-shop-scp:latest"}]' > imagedefinitions.json
+      - echo imagedefinitions.json created successfully.
+
 artifacts:
   files:
     - imagedefinitions.json
