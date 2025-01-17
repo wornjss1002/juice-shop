@@ -9,15 +9,15 @@ phases:
   build:
     commands:
       - echo Building the Docker image...
-      - docker build -t devops-juice-shop/docker-image .
+      - docker build -t juice-shop-scp .
       - echo Docker image built successfully.
       - echo Tagging the Docker image...
-      - docker tag devops-juice-shop/docker-image:latest 711387094022.dkr.ecr.ap-northeast-2.amazonaws.com/devops-juice-shop/docker-image:latest
+      - docker tag juice-shop-scp:latest 711387094022.dkr.ecr.ap-northeast-2.amazonaws.com/juice-shop-scp:latest
       - echo Docker image tagged successfully.
   post_build:
     commands:
       - echo Pushing the Docker image to Amazon ECR...
-      - docker push 711387094022.dkr.ecr.ap-northeast-2.amazonaws.com/devops-juice-shop/docker-image:latest
+      - ddocker push 711387094022.dkr.ecr.ap-northeast-2.amazonaws.com/juice-shop-scp:latest
       - echo Docker image pushed successfully.
 artifacts:
   files:
