@@ -17,7 +17,7 @@ phases:
   post_build:
     commands:
       - echo Pushing the Docker image to Amazon ECR...
-      - ddocker push 711387094022.dkr.ecr.ap-northeast-2.amazonaws.com/juice-shop-scp:latest
+      - docker push 711387094022.dkr.ecr.ap-northeast-2.amazonaws.com/juice-shop-scp:latest
       - echo Docker image pushed successfully.
 artifacts:
   files:
