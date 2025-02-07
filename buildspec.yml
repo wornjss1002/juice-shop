@@ -6,9 +6,6 @@ phases:
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 711387094022.dkr.ecr.ap-northeast-2.amazonaws.com
       - echo Successfully logged in to Amazon ECR.
-      - curl --compressed https://downloads.snyk.io/cli/stable/snyk-linux -o snyk
-      - chmod +x ./snyk
-      - mv ./snyk /usr/local/bin
 
   build:
     commands:
